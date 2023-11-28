@@ -1,11 +1,21 @@
-import GalleryItem from './GalleryItem'
+import { useContext } from 'react';
+import { DataContext } from '../../contexts/DataContext';
+import GalleryItem from './GalleryItem';
 
 function Gallery() {
-    return (
-        <div>
-            <GalleryItem />
-        </div>
-    )
+  // Get the data using useContext outside the display function
+  const data = useContext(DataContext);
+
+  // Map over the data to create GalleryItem components
+  const display = data.map(item => {
+    return <GalleryItem key={item.trackId} item={item} />;
+  });
+
+  return (
+    <div>
+      {display}
+    </div>
+  );
 }
 
-export default Gallery
+export default Gallery;

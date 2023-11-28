@@ -1,0 +1,25 @@
+/* GalleryItem.css */
+
+.gallery-item {
+    display: inline-block;
+    cursor: pointer;
+    margin: 2px;
+    overflow: hidden;
+  }
+  
+  .simple-view {
+    width: 25vw;
+    height: 20vh;
+    border: 1px solid black;
+  }
+  
+  .detail-view {
+    width: 80vw;
+    height: 20vh;
+    border: 1px solid black;
+    background-size: cover;
+    color: yellow;
+  }
+  
+  /* Add any other styles you may need */
+  
