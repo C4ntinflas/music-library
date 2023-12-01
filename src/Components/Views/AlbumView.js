@@ -1,35 +1,50 @@
-
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function AlbumView() {
-    const { id } = useParams ()
     const [ albumData, setAlbumData ] = useState([])
     
+    const { id } = useParams ()
+    
+    const navigate = useNavigate()
+
     useEffect(() => {
-        const API_URL = `http://localhost:4000/album/${id}`
         const fetchData = async () => {
-            const response = await fetch(API_URL)
-            const resData = await response.json()
-            setAlbumData(resData.results)
+            const url = `http://localhost:4000/song/${id}`
+            const response = await fetch(url)
+            const data = await response.json()
+
+            const songs = data.results.filter(item => item.wrapperType === 'track')
+            setAlbumData(songs)
         }
+
         fetchData()
     }, [id])
 
-    const justSongs = albumData.filter(entry => entry.wrapperType === 'track')
-    const renderSongs = justSongs.map((song, i) => {
-        return (
-            <div>
-                <p>{song.trackName}</p>
-            </div>
-        )
-    })
-     
+const songDisplay = albumData.map(song => {
+    return (
+        <div key={song.trackId}>
+            <p>{song.trackName}</p>
+        </div>
+    )
+})
+
+const navButtons = () => {
     return (
         <div>
+            <button onClick={() => navigate(-1)}>Back</button>
+
+            <button onClick={() => navigate('/')}>Home</button>
+        </div>
+    )
+}
+
+    return (
+        <div>
+            {navButtons()}
             <p>Album Data Goes Here!</p>
             <h2>The id passed was: {id}</h2>
-            {renderSongs}
+            {songDisplay}
         </div>
     )
 }

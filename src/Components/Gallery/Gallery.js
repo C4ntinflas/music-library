@@ -1,4 +1,4 @@
-import GalleryItem from './GalleryItem';
+import GalleryItem from './GalleryItem'
 
 function Gallery({ data }) {
   return (
@@ -10,4 +10,4 @@ function Gallery({ data }) {
   );
 }
 
-export default Gallery;
+export default Gallery

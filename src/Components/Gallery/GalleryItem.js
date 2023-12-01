@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function GalleryItem({ item }) {
-  const [view, setView] = useState(false);
+  const [view, setView] = useState(false)
 
   const simpleStyle = {
     'width': '25vw',
@@ -36,7 +36,7 @@ function GalleryItem({ item }) {
       <div style={detailStyle}>
         <h2>{item.trackName}</h2>
         <h3>
-          <Link to={`/album/${item.artistId}`}>
+          <Link to={`/artist/${item.artistId}`}>
             {item.artistName}</Link>
         </h3>
         <h3>
@@ -58,4 +58,4 @@ function GalleryItem({ item }) {
   );
 }
 
-export default GalleryItem;
+export default GalleryItem

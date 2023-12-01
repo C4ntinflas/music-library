@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function ArtistView() {
-    const { id } = useParams()
     const [ artistData, setArtistData ] = useState([])
 
-    useEffect(() => {
-        const API_URL = `http://localhost:4000/album/${id}`
+    const { id } = useParams()
+    
+    useEffect(() => {   
         const fetchData = async () => {
-            const response = await fetch(API_URL)
-            const resData = await response.json()
-            setArtistData(resData.results)
+            const url = `http://localhost:4000/album/${id}`
+            const response = await fetch(url)
+            const data = await response.json()
+
+            const albums = data.results.filter(item => item.collectionType === 'Album')
+            setArtistData(albums)
         }
+
         fetchData()
     }, [id])
 
-    const justAlbums = artistData.filter(entry => entry.collectionType === 'Album')
-    const renderAlbums = justAlbums.map((album, i) => {
+    const albumDisplay = artistData.map(album => {
         return (
-            <div> 
+            <div key={album.collectionId}>
                 <Link to={`/album/${album.collectionId}`}>
-                    <p>{album.collectionName}</p>
+                <p>{album.collectionName}</p>
                 </Link>
             </div>
         )
@@ -30,7 +33,7 @@ function ArtistView() {
         <div>
             <p>Artist Data Goes Here!</p>
             <h2>The id passed was: {id}</h2>
-            {renderAlbums}
+            {albumDisplay}
         </div>
     )
 }
