@@ -32,7 +32,7 @@ function App() {
   const handleSearch = (e, term) => {
     e.preventDefault()
     setSearch(term)
-  };
+  }
 
   return (
     <div>
@@ -53,7 +53,7 @@ function App() {
         </Routes>
       </Router>
     </div>
-  );
+  )
 }
 
 export default App
